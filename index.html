@@ -1,0 +1,142 @@
+<!--
+  ======================================================================
+  INSTITUCIÓN: CBTis 166 Pablo Torres Burgos
+  ----------------------------------------------------------------------
+  * Estudiante: Carbajal Rodriguez Daniel Asael
+  * Grupo: 3B PRO VESP  
+  * Actividad: Práctica Temática sobre Formularios en HTML5
+  * Fecha de entrega: 28 de octubre de 2026
+  ----------------------------------------------------------------------
+  * Descripción técnica:
+    - Estructura modular (HTML5, CSS3 y JavaScript) con diseño responsivo (CSS Grid/Flexbox).
+    - Uso completo de etiquetas semánticas y variantes de inputs para formularios de infraestructura cloud 
+    (<form>, <fieldset>, <legend>, <input>, <select>, etc.).
+    - Interactividad con JavaScript (envío, validación, asistente y vista previa 
+    dinámica de entornos mediante botones radio).
+  ====================================================================== -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevCore Cloud Platform - Gestión de Infraestructura</title>
+    <!-- Vinculación de la hoja de estilos externa -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Etiqueta semántica <header>: Cabecera principal del sitio -->
+    <header>
+        <div class="header-content">
+            <h1>DevCore Cloud Platform</h1>
+            <p>Sistema de Despliegue y Orquestación de Contenedores</p>
+        </div>
+    </header>
+
+    <!-- Etiqueta semántica <nav>: Barra de navegación principal -->
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Etiqueta semántica <main>: Contenedor principal de contenido -->
+    <main id="inicio">
+        
+        <section class="form-section">
+            <h2 class="section-title">Formulario de Configuración y Despliegue</h2>
+            <p class="section-desc">Complete el siguiente formulario técnico para aprovisionar su clúster, elegir servicios y personalizar el entorno cloud.</p>
+      
+            <!-- 
+              ==================================================
+              ETIQUETA <form>: Contenedor raíz del formulario 
+              Atributos:
+              - action: Ruta o script del servidor que procesa los datos.
+              - method: Método HTTP (POST para envío seguro).
+              - enctype: Permite adjuntar archivos multimedia.
+              ================================================== 
+            -->
+            <form id="form-reserva" action="/procesar-despliegue" method="POST" enctype="multipart/form-data">
+
+                <!-- 
+                  ETIQUETA <fieldset>: Agrupa visual y lógicamente un bloque de campos.
+                  ETIQUETA <legend>: Título descriptivo para el fieldset.
+                  ETIQUETA <label>: Etiqueta de texto accesible conectada mediante el atributo 'for'.
+                  ETIQUETA <input>: Control interactivo de entrada cuyo comportamiento cambia con el 'type'.
+                -->
+                <fieldset>
+                    <legend>1. Información del Administrador del Clúster</legend>
+                    <div class="input-group">
+                        <label for="nombre-huesped">Nombre del Ingeniero Responsable:</label>
+                        <!-- type="text": Campo de texto plano. 'required' obliga a llenarlo -->
+                        <input type="text" id="nombre-huesped" name="nombre_ingeniero" 
+                         placeholder="Ej. Daniel Carbajal" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>2. Credenciales y Parámetros de Conectividad</legend>
+
+                    <div class="input-group">
+                        <label for="in-email">Correo Corporativo / Root:</label>
+                        <!-- type="email": Valida automáticamente formato de correo con '@' -->
+                        <input type="email" id="in-email" name="correo" placeholder="admin@devcore.io" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="in-password">Contraseña Maestra del Servidor:</label>
+                        <!-- type="password": Oculta los caracteres con asteriscos o puntos -->
+                        <input type="password" id="in-password" name="password" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="in-tel">Teléfono de Alerta (S.O.S):</label>
+                        <!-- type="tel": Optimiza el teclado numérico en dispositivos móviles -->
+                        <input type="tel" id="in-tel" name="telefono" placeholder="777-000-0000">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="in-url">Repositorio Git o Documentación técnica (Opcional):</label>
+                        <!-- type="url": Valida que la entrada comience con un protocolo web válido -->
+                        <input type="url" id="in-url" name="redes" placeholder="https://github.com/usuario/proyecto">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="in-search">Buscar microservicios o dependencias:</label>
+                        <!-- type="search": Campo optimizado para búsquedas -->
+                        <input type="search" id="in-search" name="busqueda_servicio" placeholder="Ej. Redis, PostgreSQL...">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="in-number">Número de Nodos de Cómputo (Workers):</label>
+                        <!-- type="number": Control numérico con límites min, max e incremento step -->
+                        <input type="number" id="in-number" name="workers" min="1" max="32" value="2">
+                    </div>
+
+                    <div class="input-group checkbox-wrapper">
+                        <!-- type="checkbox": Casilla de verificación para selección múltiple -->
+                        <input type="checkbox" id="check1" name="respaldo" value="si">
+                        <label for="check1">Habilitar respaldos automatizados en tiempo real (Snapshots)</label>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Arquitectura del Servidor:</label><br>
+                        <!-- type="radio": Permite seleccionar una sola opción dentro del mismo grupo (name="habitacion") -->
+                        <input type="radio" id="r1" name="habitacion" value="sencilla"> <label for="r1">Instancia Estándar (Shared CPU)</label> &nbsp;&nbsp;
+                        <input type="radio" id="r2" name="habitacion" value="suite" checked> <label for="r2">Clúster Dedicado de Alto Rendimiento</label>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Configuración de Red y Seguridad:</label><br>
+                        <!-- type="radio": Permite seleccionar una sola opción dentro del mismo grupo -->
+                        <input type="radio" id="r3" name="red_segura" value="basica"> <label for="r3">Firewall Estándar</label> &nbsp;&nbsp;
+                        <!--checked sirve para que un boton de radio o casilla de verificación
+                        debe aparecer marcado por defecto cuando la página cargue por primera vez.-->
+                        <input type="radio" id="r4" name="red_segura" value="avanzada" checked> <label for="r4">Zero-Trust con VPN Privada</label>
+                        
+                        <!-- Contenedor visual para mostrar el esquema correspondiente -->
+                        <div class="preview-habitacion" style="margin-top: 15px;">
+                            <img id="imagen-habitacion" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=80" alt="Esquema de red cloud" style="width: 100%; max-width: 400px; height: 220px; object-fit: cover; border-radius: 8px; border: 1px solid #cbd5e1;">
+                        </div>
